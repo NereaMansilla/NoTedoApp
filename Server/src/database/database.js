@@ -7,7 +7,7 @@ const user = process.env.USER
 const host = process.env.HOST
 
 export const sequelize = new Sequelize(
-'projectDB', `${user}`, `${password}`,{
+'projectdb', `${user}`, `${password}`,{
 host: `${host}`,
 dialect: 'postgres',
 logging:false

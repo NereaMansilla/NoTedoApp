@@ -125,3 +125,8 @@ export async function getProjectsById(req, res) {
         res.status(500).send({message: message.error})
      }
 } */
+
+
+export function auxilio (req,res){
+res.send('FUNCIONA :D')
+}
