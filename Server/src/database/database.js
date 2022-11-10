@@ -7,10 +7,10 @@ const user = process.env.USER
 const host = process.env.HOST
 const dialect = process.env.DIALECT
 const name = process.env.DATABASE_NAME
+const port = process.env.DBPORT
+
 
 export const sequelize = new Sequelize(
-`${name}`, `${user}`, `${password}`,{
-host: `${host}`,
-dialect: `${dialect}`,
+`${dialect}://${user}:${password}@${host}:${port}/${name}`,{
 logging:false
 })
