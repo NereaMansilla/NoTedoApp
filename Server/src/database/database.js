@@ -5,10 +5,12 @@ dotenv.config({ path: './.env' })
 const password = process.env.PASSWORD
 const user = process.env.USER
 const host = process.env.HOST
+const dialect = process.env.DIALECT
+const name = process.env.DATABASE_NAME
 
 export const sequelize = new Sequelize(
-'projectdb', `${user}`, `${password}`,{
+`${name}`, `${user}`, `${password}`,{
 host: `${host}`,
-dialect: 'postgres',
+dialect: `${dialect}`,
 logging:false
 })
