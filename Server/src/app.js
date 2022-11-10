@@ -9,12 +9,10 @@ const app = express()
 app.use(express.json())
 /* app.use(urlencoded()) */
 app.use(router)
-app.use(cors({
-  origin:"*"
-}))
+app.use(cors())
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type,  Authorization, Accept")
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
