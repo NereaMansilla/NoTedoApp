@@ -1,0 +1,54 @@
+.containerModal{
+    z-index: 25;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color:rgba(0,0,0,.5);
+    position:fixed;
+}
+
+.form{
+    display:flex;
+    flex-direction: column;
+}
+
+
+
+
+.modal2{
+    background-color: #F0EBEB;
+   
+}
+
+
+
+
+
+.containerCardTask{
+    z-index: 25;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color:rgba(0,0,0,.5);
+    position:fixed;
+}
+
+
+.modal2Content{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: transparent;
+   
+   height: 10vh;
+}
+
+
+.inputTaskContainer{
+    align-self: flex-end;
+    
+}

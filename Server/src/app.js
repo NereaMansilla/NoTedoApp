@@ -12,20 +12,9 @@ app.use(cors({
 }))
 app.use(express.json())
 /* app.use(urlencoded()) */
-app.use('/', router)
+app.use( router)
 app.use(morgan('dev'))
 
-/* app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, Content-Type,  Authorization, Accept")
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-      next();
- 
-}); */
 
-/* app.use(routesProject)
-app.use(taskRoutes)
-app.use(userRoutes) */
 
 export default app;

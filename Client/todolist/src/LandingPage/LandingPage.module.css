@@ -1,0 +1,26 @@
+.landingPage{
+    background-image: url('../Assets/LandingPage2.png');
+    background-size: cover;
+    height: 100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: flex-start;
+
+   
+}
+
+
+
+.registerContainer{
+  
+width: 100%;
+}
+ .register{
+    position:relative;
+ left: 15%;
+    justify-self: center;
+    align-self:flex-start;
+} 
+
+

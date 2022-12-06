@@ -8,15 +8,14 @@ dotenv.config({ path: '../.env' })
 
 
 //ENTER
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200 // for some legacy browsers
-  }
+
 
 export async function singIn(req, res) {
-
+    
     try {
         const { email, password } = req.body
+        console.log(email,password)
+
         const user = await User.findOne({
             where: {
                 email
@@ -24,7 +23,7 @@ export async function singIn(req, res) {
 
         })
         console.log(user)
-        if (user === null) throw new Error("Password or email incorrect") /* res.status(404).json({msg:"Password or email incorrect"})  */
+        if (user === null) res.json({ msg: "there is no user with this data", authorized:false})
 
 
         else {
@@ -36,15 +35,18 @@ export async function singIn(req, res) {
                 })
 
                 res.json({
-                    user,
-                    token: token
+                    token: token,
+                    authorized:true,
+                    id: user.id,
+                    name:user.name
                 })
 
             }
             else {
-                console.log('headers', req.headers)
-                res.status(500).json({
-                    msg: "password or user invalid"
+                
+                res.json({
+                    msg: "password or user invalid",
+                    authorized:false
                 })
 
             }
@@ -64,30 +66,44 @@ export async function singIn(req, res) {
 //REGISTER
 export async function singUp(req, res, next) {
     try {
+
+        
         const password = bcrypt.hashSync(req.body.password, parseInt(process.env.ROUND))
         const { name, email } = req.body
-        const user = await User.create({
-            name,
-            email,
-            password
+        const userExist= await User.findOne({
+            where:{
+                email
+            }
         })
 
+        if(userExist) res.json({msg: 'this email alredy exist', authorized:false, alredyExist:true})
 
+        else{
 
-        const token = Jwt.sign({ user: user }, `${process.env.SECRET_AUTH}`, {
-            expiresIn: `${process.env.EXPIRES}`
-
-        })
-        next()
-        console.log(user)
-        res.json({
-            user: user,
-            token: token
-        })
+            const user = await User.create({
+                name,
+                email,
+                password
+            })
+    
+    
+    
+            const token = Jwt.sign({ user: user }, `${process.env.SECRET_AUTH}`, {
+                expiresIn: `${process.env.EXPIRES}`
+    
+            })
+            next()
+            console.log(user)
+            res.json({
+                user: user,
+                token: token,
+                authorized: true
+            })
+        }
 
 
     } catch (error) {
-        res.send({ message: error.message })
+        res.send({ message: error.message, authorized:false})
     }
 }
 
@@ -97,7 +113,7 @@ export async function singUp(req, res, next) {
 
 export async function deleteUser(req, res) {
     const { email } = req.body
-    const user = User.destroy({
+     User.destroy({
         where: {
             email
         },

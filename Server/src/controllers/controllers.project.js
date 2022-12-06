@@ -4,7 +4,8 @@ import {User } from '../models/User.js'
 
 //bring me all the projects that belongs to user 
 export async function getProjects(req, res) {
- const {userID} = req.body
+ const {userID} = req.params
+ console.log('userID', userID)
     try {
         const projects = await Project.findAll({
             where:{
@@ -23,13 +24,14 @@ export async function getProjects(req, res) {
 
 export async function createProject(req, res) {
     //see if i have to pass the userID by body or param (from front)
+    //remeber put the priority from body too
     const {userID } = req.body
-    const { name, priority, description} = req.body
+    const { name, description} = req.body
     try {
+    
         const newProject = await Project.create(
             {
                 name,
-                priority,
                 description, 
                 userID
                 
@@ -77,7 +79,7 @@ export async function updateProject(req, res) {
 
 export async function deleteProject(req, res) {
     const id = req.params.id
-    const {userID} = req.body
+    const userID = req.params.userID
 
     try {
         await Project.destroy({
@@ -86,7 +88,13 @@ export async function deleteProject(req, res) {
                 userID
             }
         })
-        res.send('delete sucessfully')
+
+        const projectNoDelete = await Project.findAll({
+            where:{
+                userID
+            }
+        })
+        res.send(projectNoDelete)
     } catch (error) {
         res.status(500).send({ message: error.message })
     }
@@ -112,21 +120,3 @@ export async function getProjectsById(req, res) {
     }
 }
 
-/* export async function getTaskOneProject(req,res){
-    const id = req.params.id
-     try {
-        const task = await Task.findAll({
-            where:{
-                projectID:id
-            }
-        })
-        res.json(task)
-     } catch (error) {
-        res.status(500).send({message: message.error})
-     }
-} */
-
-
-export function auxilio (req,res){
-res.send('FUNCIONA :D')
-}

@@ -5,7 +5,7 @@ dotenv.config({ path: '../.env' })
 export default function Auth (req,res, next){
      const token = req.headers.authorization.split(" ")[1] //here i have to catch the token sending from the front
     
-
+console.log('token', req.headers.authorization)
     if(!token){
         res.status(401).json({msg: "access not authorizate"})
     }else{
