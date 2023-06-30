@@ -3,12 +3,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import logoNavBar from '../Assets/logoNavbar.png'
 import Button from '@mui/material/Button';
-import {useSelector} from 'react-redux'
+/* import {useSelector} from 'react-redux' */
 /* import {Modal} from '../Modal/Modal.jsx' */
 /* import  {setModal}  from '../Features/CreateProjects/CreateProjects';
 import {useDispatch} from 'react-redux' */
 import { setModal } from '../Features/CreateProjects/CreateProjects';
 import { useDispatch } from 'react-redux';
+import { UseUser } from '../Hooks/UseUser';
 import React from 'react'
 
 
@@ -16,10 +17,10 @@ import React from 'react'
 
 export const NavBar = () => {
 const dispatch = useDispatch()
-    const user = useSelector(state => state.users)
-   /*  const [openModal, setOpenModal] = useState(false) */
-  const modal1 = useSelector(state => state.newProject.modal)
-  console.log('aca esta el modal', modal1)
+const user= UseUser()
+
+
+
 
 
 const openModalButton = () =>{
@@ -41,7 +42,7 @@ const openModalButton = () =>{
             
         </Typography>
         <Typography variant='h6' >
-       Hello {user.users.name}! 
+       Hello {user}! 
         </Typography>  
     <Button sx={{background: '#0080FF', color: '#000', borderRadius: '50px'}} onClick={openModalButton}> Create new Project </Button>                
     </Toolbar>

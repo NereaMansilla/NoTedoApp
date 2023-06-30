@@ -23,6 +23,24 @@ export const userCall = createAsyncThunk(
 
 
 
+export const createUserCall = createAsyncThunk(
+  'newUser/createUserCall', async (input) =>{
+      try {
+      const response = await axios.post('http://localhost:3001/user/register',{
+          name:input.name,
+          password: input.password,
+          email: input.email
+  
+      })
+      return response.data
+  } catch (error) {
+          console.log(error)
+      }
+  }
+  
+  )
+
+
 
 
 
@@ -32,7 +50,8 @@ export const user = createSlice({
   initialState:{
     users:{},
     loading: false,
-    error: false
+    error: false,
+    newUsers:{}
   },
 
   reducers: {
@@ -43,12 +62,20 @@ export const user = createSlice({
      state.loading = true
     },
     [userCall.fulfilled]: (state, {payload})=>{
+      localStorage.setItem("id", payload.user.id);
+      localStorage.setItem("token", payload.token);
+      localStorage.setItem("user", payload.user.name);
     state.users= payload
 
     },
     [userCall.rejected]: (state, {payload})=>{
       state.error = true
     },
+    [createUserCall.fulfilled]: (state, {payload})=>{
+      state.users = payload
+    
+      state.newUsers = payload
+    }
   }
 })
 

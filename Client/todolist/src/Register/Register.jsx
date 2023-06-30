@@ -3,7 +3,7 @@ import React from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import  s  from './Register.module.css'
-import {createUserCall} from '../Features/CreateUser/CreateUsers.js'
+import {createUserCall} from '../Features/Users/UsersSlice.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -13,9 +13,9 @@ import logo from '../Assets/logo.png'
 export const Register = () => {
 
   const dispatch = useDispatch()
-  const newUser = useSelector(state => state.newUser)
+  const newUser = useSelector(state => state.users.newUsers)
   const navigate = useNavigate()
-
+console.log('newUsers', newUser.authorized)
 
 const [user, setUser] = useState({
   name: '',
@@ -27,11 +27,9 @@ const [error, setErrors] = useState({})
 
 
 
-console.log('newuserje', newUser.newUser.token)
 
-useEffect(()=>{
-if(newUser.newUser.authorized === true) navigate('/projects')
-}, [newUser.newUser.authorized, navigate])
+
+
 
 
 const handleInput = (e) =>{
@@ -51,7 +49,11 @@ const submitInfo = (e) =>{
 }
 
 
-
+useEffect(()=>{
+  if(newUser.authorized === true){
+    navigate('/projects')
+  }
+}, [newUser, navigate])
 
   return (
  
@@ -65,7 +67,7 @@ const submitInfo = (e) =>{
  <div className={s.logoContainer}>
   <img src={logo} classname={s.logo} alt='logo' /> 
  </div>
- 
+  
     <TextField type='text'
         name='name'
         label="name"
@@ -86,22 +88,22 @@ const submitInfo = (e) =>{
         onFocus={() => setErrors('')}
         
         
-      />
-        <p className={s.error}> {error.email} </p>
+      /> 
+       <p className={s.error}> {error.email} </p>
 
-<TextField type='password'
+ <TextField type='password'
         name='password'
         label="password"
         variant="standard"
         placeholder="ex: f4k3p4ssw0rd"
         onChange={handleInput}
         onFocus={() => setErrors('')}
-        />
+        /> 
 
-      <p className={s.error}> {error.password} </p>
+     <p className={s.error}> {error.password} </p> 
     <Button className={s.btnAccount}  variant="contained" type='submit' > 
         Create account
-      </Button>
+      </Button>  
       </form>
  
    
@@ -112,8 +114,8 @@ const submitInfo = (e) =>{
      
          
     {
-   newUser.newUser.authorized === false && newUser.newUser.alredyExist === true ? <ErrorCreateUser/> : null
-    }
+   newUser.authorized === false && newUser.alredyExist === true ? <ErrorCreateUser/> : null
+    } 
 
     
     </div>

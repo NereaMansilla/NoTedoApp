@@ -10,24 +10,29 @@ import { useDispatch } from 'react-redux';
 import {useState} from 'react'
 /* import  {newProjectCall}   from '../Features/CreateProjects/CreateProjects'; */
 import { createProject } from '../Features/getProjects/getProjects.js'
-import { ModalTask } from './ModalTask';
+/* import { getProjects } from '../Features/getProjects/getProjects.js' */
+import { UseId } from '../Hooks/UseId';
+/* import { UseToken } from '../Hooks/UseToken'; */
+import { UseToken } from '../Hooks/UseToken';
 
 import React from 'react'
 
 export const Modal = () => {
   
-
 const modal1 = useSelector(state => state.newProject.modal)
-const user = useSelector(state => state.users)
+const id = UseId()
+const token = UseToken()
 
 
-  console.log('user', user.users.id)
+
+
 const dispatch = useDispatch()
  const [project, setProject] = useState({
   name: '', 
   description: '' 
 
  }) 
+
 
 const closeModal = () =>{
   dispatch(setModal(false))
@@ -37,8 +42,12 @@ const closeModal = () =>{
 
 const sendProject = (e) =>{
   e.preventDefault()
-  dispatch( createProject({projectData: project, id:user.users.id}))
+  dispatch( createProject({projectData: project, id:id, token}))
   dispatch(setModal(false))
+  setProject({
+    name: '', 
+    description: ''
+  })
 }
 
 
@@ -50,9 +59,9 @@ const handleChange = (e) =>{
   })
 }
 
-const setModalTask = () =>{
+/* const setModalTask = () =>{
   dispatch(setModal2(true))
-}
+} */
 if(modal1 === false) return null 
 
 return(
@@ -71,6 +80,7 @@ return(
          id="standard-basic"
          label="Project Name"
          variant="standard"
+         value={project.name}
          onChange={handleChange} />
 
         <TextField 
@@ -78,14 +88,13 @@ return(
          id="standard-basic"
          label="Add some description"
          variant="standard"
+         value={project.description}
          onChange={handleChange} />
 
         </form>
         </CardContent>
         <Button variant="contained" onClick={sendProject } >Create</Button>
-    <Button variant="outlined" onClick={setModalTask}>Add task</Button>
 
-    <ModalTask />
     </Card>
 
     </div>

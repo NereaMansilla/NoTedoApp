@@ -9,53 +9,71 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch} from 'react-redux'
 import {deleteProject} from '../Features/getProjects/getProjects'
-import { setModal3 } from '../Features/CreateProjects/CreateProjects';
-import { getTask } from '../Features/Tasks/getTasks';
+import { useSelector } from 'react-redux';
+import {setModalEdit} from '../Features/CreateProjects/CreateProjects'
+import { getIdProject } from '../Features/CreateProjects/CreateProjects';
+import { UseToken } from '../Hooks/UseToken';
+import { UseId } from '../Hooks/UseId';
+import { getProjectsById } from '../Features/getProjects/getProjects';
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
 import s from './Card.module.css'
 
 
 
 
 export const ProjectCard = ({ project }) => {
-
  
   const dispatch = useDispatch()
-  
-  const seeTask = () =>{
-    dispatch(setModal3(true))
-    dispatch(getTask(project.tasks))
-
-    
-  }
-  
+  const token = UseToken()
+  const idUser = UseId()
+  const navigate = useNavigate()
   
 
   const deleteSearch = () =>{
-    dispatch(deleteProject(project))
+    dispatch(deleteProject({project,token}))
   
   }
+
+  const editProject = (id) =>{
+   dispatch(setModalEdit(true)) 
+  dispatch(getProjectsById({token,idUser,id})) 
+
+  }
+
+  const handleTask = (id) =>{
+    
+    dispatch(getProjectsById({token,idUser,id})) 
+    
+    
+  }
+
+  
   return (
+   
         <div>
           
-
-        <Card onClick={seeTask} sx={{ maxWidth: 340, background:'#F0EBEB', marginBottom:'5vh'}}>
+       
+        <Card sx={{ maxWidth: 340, background:'#F0EBEB', marginBottom:'5vh'}}>
             <CardContent className={s.cardContent}>
-                <Typography  gutterBottom variant="h5" component="div">
+              <NavLink to={`/Task/${project.name}`} style= { { textDecoration: 'none', color:'black' }} >
+                <Typography className={s.text}  onClick={()=>handleTask(project.id)}  gutterBottom variant="h5" component="div" sx={{cursor:'pointer'}}>
                {project.name}
                 </Typography>
+              </NavLink>
                 <Typography gutterBottom variant="h6" component="div">
              {project.description}
                 </Typography>
 
             </CardContent>
-            <Button size="small">Edit <EditIcon/> </Button>
+            <Button size="small" onClick={()=>editProject(project.id)}>Edit <EditIcon/> </Button>
             <Button size="small" onClick={deleteSearch}>Delete <DeleteIcon/> </Button>
         </Card>
-        {/* <div className={s.modelTask}>
-
-        <AllTaskModal/>
-        </div> */}
+      
         </div>
+
+
      
       
      

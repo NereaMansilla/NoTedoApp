@@ -3,3 +3,8 @@
     height: 100vh;
     width: 100vw;
 }
+
+.text:hover{
+color:blue;
+text-decoration: underline blue;
+}

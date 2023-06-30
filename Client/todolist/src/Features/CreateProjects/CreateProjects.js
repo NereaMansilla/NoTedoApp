@@ -2,24 +2,7 @@ import { createSlice,  createAsyncThunk  } from '@reduxjs/toolkit'
  import axios from 'axios';
  
 
- export const newProjectCall = createAsyncThunk('newProject/projectCall', async (project)=>{
 
-    try{
-       const response = await axios.post('http://localhost:3001/project', {
-          name: project.projectData.name,
-          description: project.projectData.description,
-          userID: project.id
-         })
-         console.log('response', response)
-         console.log('data', project)
-
-    return response.data
-   }
-   catch(error){
-   console.log(error)
-   }
-
- })
 
 
 const createProject= createSlice({
@@ -27,7 +10,9 @@ const createProject= createSlice({
  initialState:{
     modal: false,
     modal2:false,
-    seeTasks: false
+    seeTasks: false,
+    modalEdit:false,
+    idProject: ""
  },
  reducers:{
     setModal: (state, action)=>{
@@ -38,13 +23,17 @@ const createProject= createSlice({
     },
     setModal3: (state,action)=>{
       state.seeTasks = action.payload
+    },
+    setModalEdit: (state, action) =>{
+      state.modalEdit = action.payload
+    },
+    getIdProject: (state,action)=>{
+      state.idProject = action.payload
     }
  },
 
  extraReducers:{
-   [newProjectCall.fulfilled]: (state, {payload}) =>{
-    state.newProject = payload
-   }
+
  }
 
 })
@@ -54,3 +43,5 @@ export default createProject.reducer
 export const {setModal} = createProject.actions
 export const {setModal2} = createProject.actions
 export const {setModal3} = createProject.actions
+export const {setModalEdit} = createProject.actions
+export const {getIdProject} = createProject.actions

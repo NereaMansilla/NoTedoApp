@@ -18,7 +18,8 @@
 
 
 .modal2{
-    background-color: #F0EBEB;
+    background-color:#F0EBEB;
+    border: 2px solid #F0EBEB;
    
 }
 
@@ -42,7 +43,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    border-bottom: transparent;
+    
    
    height: 10vh;
 }
@@ -50,5 +51,11 @@
 
 .inputTaskContainer{
     align-self: flex-end;
+    
+}
+
+
+.textTask{
+    font-size: 1em;
     
 }
