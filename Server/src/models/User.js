@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../database/database.js'
 import { Project } from './Project.js'
+import { Task } from './Task.js'
 
 
 export const User = sequelize.define('user', {
@@ -46,3 +47,4 @@ User.hasMany(Project, {
     targetId: 'id'
 
  })
+

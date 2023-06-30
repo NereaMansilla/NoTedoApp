@@ -22,23 +22,22 @@ export async function singIn(req, res) {
             }
 
         })
-        console.log(user)
+      
         if (user === null) res.json({ msg: "there is no user with this data", authorized:false})
 
 
         else {
             if (bcrypt.compareSync(password, user.password)) {
-                console.log(req.headers)
+             
                 const token = Jwt.sign({ user: user }, `${process.env.SECRET_AUTH}`, {
                     expiresIn: `${process.env.EXPIRES}`
 
                 })
 
                 res.json({
+                    user:user,
                     token: token,
                     authorized:true,
-                    id: user.id,
-                    name:user.name
                 })
 
             }
@@ -92,6 +91,7 @@ export async function singUp(req, res, next) {
                 expiresIn: `${process.env.EXPIRES}`
     
             })
+            console.log('token', token)
             next()
             console.log(user)
             res.json({

@@ -29,7 +29,7 @@ import cors from 'cors'
 
 async function main() {
     try {
-        await sequelize.sync({ force: false })
+        await sequelize.sync({ force:false })
         app.listen(port, () => {
             console.log(`server listening on port ${port}`)
         })

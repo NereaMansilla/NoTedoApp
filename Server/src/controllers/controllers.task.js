@@ -2,6 +2,13 @@ import {Task} from '../models/Task.js'
 import {Project} from '../models/Project.js'
 
 
+export async function getTaskById(req,res){
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 
 export async function createTask(req,res){
     
@@ -11,11 +18,13 @@ export async function createTask(req,res){
         const newTask = await Task.create({
             name,
             done,
+            projectID
             
     
         })
          const project = await Project.findByPk(projectID)
           project.addTask(newTask)
+          console.log('proyecto', project)
         res.json(newTask)
     } catch (error) {
         res.status(500).send({ message: error.message })
@@ -51,13 +60,15 @@ try {
 export async function updateTask(req,res){
     
     const id = req.params.id 
+    const { name } = req.body
 
     try {
         const oldTask = await Task.findByPk(id)
-        oldTask.set(req.body)
-    
-        await oldTask.save()
-        res.json(oldTask)
+        const AddnewTask = await oldTask.update({
+         name
+        })
+        
+        res.json(AddnewTask)
         
     } catch (error) {
         res.status(500).send({message: error.message})

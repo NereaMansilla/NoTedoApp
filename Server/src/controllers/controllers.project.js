@@ -2,10 +2,11 @@ import { Project } from '../models/Project.js'
 import { Task } from '../models/Task.js'
 import {User } from '../models/User.js'
 
+
 //bring me all the projects that belongs to user 
 export async function getProjects(req, res) {
  const {userID} = req.params
- console.log('userID', userID)
+
     try {
         const projects = await Project.findAll({
             where:{
@@ -26,6 +27,7 @@ export async function createProject(req, res) {
     //see if i have to pass the userID by body or param (from front)
     //remeber put the priority from body too
     const {userID } = req.body
+    const {taskID} = req.body
     const { name, description} = req.body
     try {
     
@@ -36,13 +38,19 @@ export async function createProject(req, res) {
                 userID
                 
              
-            }
+            },
+           
+           
         )
-        const user = await User.findByPk(userID) // find the user
-        user.addProject(newProject) //put to the user the new proyect created
+       const user = await User.findByPk(userID) // find the user
+        await user.addProject(newProject) //put to the user the new proyect created
+
+
+        const a = await Project.findByPk(newProject.id, {include: Task})
+     console.log(newProject)
        
 
-        res.json(newProject)
+        res.json(a)
 
     } catch (error) {
         res.status(500).send({ message: error.message })
@@ -52,7 +60,7 @@ export async function createProject(req, res) {
 
 export async function updateProject(req, res) {
     const { id } = req.params
-    const {userID} = req.body
+    const {userID} = req.params
     const { name, priority, description } = req.body
 
     try {
@@ -101,22 +109,30 @@ export async function deleteProject(req, res) {
 }
 
 
-export async function getProjectsById(req, res) {
-    const id = req.params.id
-    const {userID} = req.body
-    try {
-        const project = await Project.findOne({
-            where: {
-                id: id,
-                userID
-            }, 
-            include: Task 
-        })
-        project === null ? res.status(404).send({ message: 'project does not exists' }) :
-            res.json(project)
 
-    } catch (error) {
-        res.status(500).send({ message: error.message })
-    }
+export async function ProjectById(req,res){
+  const id = req.params.id
+  const {userID}= req.params
+
+  try {
+     
+     const project = await Project.findOne({
+        where:{
+            id,
+            userID
+        },
+       include:Task
+     })
+    
+      if(project === null) res.status(404)
+      
+      res.json(project)
+    
+  } catch (error) {
+    console.log(error)
+  }
+
+
 }
+
 
