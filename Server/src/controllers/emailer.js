@@ -44,5 +44,19 @@ export async function sendMail(req, res) {
 }
    
  
+export async function emailRecover (req,res){
+    const {email} = req.body
+    const link = "https://www.youtube.com/watch?v=uwMFPoWm0qk"
+    const transporter = createTransport()
+
+    const mail = await transporter.sendMail({
+        from: "sometingexample@gmail.com",
+        to: `${email}`,
+        subject: "Recover password",
+        html: `<h3>Hello! if you want to recover your password please go to this link <h3/> ${link}`
+    })
+}
       
+
+
     

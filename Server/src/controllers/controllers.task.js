@@ -1,14 +1,30 @@
 import {Task} from '../models/Task.js'
 import {Project} from '../models/Project.js'
+import { Sequelize } from 'sequelize'
 
 
-export async function getTaskById(req,res){
+
+
+export async function getTasks(req,res){
+    const {projectID} = req.params 
+   
     try {
-        
+        const project = await Task.findAll({
+            where:{
+                projectID
+            },
+            order: [
+                [ Sequelize.col('id'), 'ASC']
+            ],
+        })
+        console.log('pppp', project)
+        res.json(project)
+       
     } catch (error) {
-        
+        console.log(error)
     }
 }
+
 
 export async function createTask(req,res){
     
@@ -24,7 +40,7 @@ export async function createTask(req,res){
         })
          const project = await Project.findByPk(projectID)
           project.addTask(newTask)
-          console.log('proyecto', project)
+          
         res.json(newTask)
     } catch (error) {
         res.status(500).send({ message: error.message })
@@ -36,7 +52,7 @@ export async function createTask(req,res){
 
 export async function deleteTask(req,res){
 const id = req.params.id
-console.log(id)
+
 
 try {
     await Task.destroy({
@@ -75,4 +91,23 @@ export async function updateTask(req,res){
     }
 
 
+}
+
+export async function doneTask(req,res){
+    const { id } = req.body
+
+    try {
+        const task = await Task.findOne({
+            where:{
+                id
+            }
+        })
+        task.update({
+            done : !(task.done)
+        }) 
+    
+        res.json(task)
+    } catch (error) {
+        console.log(error)
+    }
 }

@@ -125,7 +125,7 @@ export async function ProjectById(req,res){
      })
     
       if(project === null) res.status(404)
-      
+  
       res.json(project)
     
   } catch (error) {

@@ -14,7 +14,7 @@ export async function singIn(req, res) {
     
     try {
         const { email, password } = req.body
-        console.log(email,password)
+        
 
         const user = await User.findOne({
             where: {
@@ -22,7 +22,7 @@ export async function singIn(req, res) {
             }
 
         })
-      
+       
         if (user === null) res.json({ msg: "there is no user with this data", authorized:false})
 
 
@@ -108,7 +108,21 @@ export async function singUp(req, res, next) {
 }
 
 
+export async function verifyUserExist (req,res,next) {
+    const {email} = req.body
+    const userVerify = await User.findOne({
+        where:{
+            email
+        }
 
+    })
+ if(!userVerify) return res.send(false)
+    if(userVerify) {
+        res.json(userVerify)
+        next()   
+    }
+   
+}
 
 
 export async function deleteUser(req, res) {
@@ -121,3 +135,21 @@ export async function deleteUser(req, res) {
     })
     res.send('deleted')
 }
+
+
+export async function updatePassword(req,res){
+    const {email} = req.body
+    const password = bcrypt.hashSync(req.body.password, parseInt(process.env.ROUND))
+    
+    const user = await User.findOne({
+        where:{
+            email
+        }
+    })
+    console.log('password anterior', user.password)
+   user.update({
+    password
+   })
+    
+    console.log('password nueva', password)
+    }
