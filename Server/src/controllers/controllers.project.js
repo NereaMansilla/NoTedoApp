@@ -135,4 +135,7 @@ export async function ProjectById(req,res){
 
 }
 
+export function hello(req,res){
+res.send("Hello world")
+}
 
