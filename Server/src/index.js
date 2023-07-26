@@ -35,7 +35,7 @@ async function main() {
         })
 
     } catch (error) {
-        console.log('Unable to connect to database ', error)
+        console.log('Unable to connect to database :( ', error)
     }
 }
 
