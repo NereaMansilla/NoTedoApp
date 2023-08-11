@@ -10,12 +10,14 @@ import { useNavigate } from "react-router-dom";
 import { Validate } from './validators';
 import {ErrorCreateUser} from '../Error/ErrorCreateUser.jsx'
 import logo from '../Assets/logo.png'
+import { NavLink } from 'react-router-dom';
+import { Typography } from '@mui/material';
 export const Register = () => {
 
   const dispatch = useDispatch()
   const newUser = useSelector(state => state.users.newUsers)
   const navigate = useNavigate()
-console.log('newUsers', newUser.authorized)
+
 
 const [user, setUser] = useState({
   name: '',
@@ -48,6 +50,9 @@ const submitInfo = (e) =>{
  dispatch(createUserCall(user))
 }
 
+const handleSendToLP = () =>{
+  navigate('/')
+}
 
 useEffect(()=>{
   if(newUser.authorized === true){
@@ -58,14 +63,17 @@ useEffect(()=>{
   return (
  
 
+<div className={s.containerRegister}>
+
+
+ <Typography onClick={handleSendToLP} className={s.txtHome}>Back</Typography>
 
    <div className={s.containerForm}>
-  
 
   <form  onSubmit={submitInfo} className={s.formAccount}>
  
  <div className={s.logoContainer}>
-  <img src={logo} classname={s.logo} alt='logo' /> 
+  <img src={logo} className={s.logo} alt='logo' /> 
  </div>
   
     <TextField type='text'
@@ -113,12 +121,14 @@ useEffect(()=>{
     
      
          
-    {
+    {/* {
    newUser.authorized === false && newUser.alredyExist === true ? <ErrorCreateUser/> : null
-    } 
+    }  */}
 
     
+
     </div>
+</div>
 
  
   

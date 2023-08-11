@@ -5,7 +5,7 @@ import axios from 'axios';
 export const getProjects = createAsyncThunk('userProjects/projectCall', async(data) =>{
     
 try {
-    const response = await axios.get(`http://localhost:3001/project/${data.id}`,{
+    const response = await axios.get(`https://notedo.onrender.com/project/${data.id}`,{
        
         headers:{
 
@@ -14,6 +14,7 @@ try {
             
         }
     })
+    
     return response.data
 } catch (error) {
     console.log(error)
@@ -26,7 +27,7 @@ export const createProject = createAsyncThunk('userProjects/newProject', async(p
 
     try{
 
-    const response2 = await axios.post('http://localhost:3001/project',{
+    const response2 = await axios.post('https://notedo.onrender.com/project',{
         name: project.projectData.name,
         description: project.projectData.description,
         userID: project.id
@@ -49,7 +50,7 @@ export const createProject = createAsyncThunk('userProjects/newProject', async(p
 
 export const deleteProject= createAsyncThunk('userProjects/delete', async(data)=>{
     try{
-        const response3 = await axios.delete(`http://localhost:3001/project/${data.project.userID}/${data.project.id}`,{
+        const response3 = await axios.delete(`https://notedo.onrender.com/project/${data.project.userID}/${data.project.id}`,{
             headers:{
                 authorization: 'Bearer ' + data.token
             }
@@ -70,7 +71,7 @@ export const getProjectsById = createAsyncThunk('userProjects/projectId', async(
 
     try{
 
-    const response4 = await axios.get(`http://localhost:3001/project/${project.idUser}/${project.id}`,
+    const response4 = await axios.get(`https://notedo.onrender.com/project/${project.idUser}/${project.id}`,
   {
     headers:{
         authorization: 'Bearer ' + project.token
@@ -89,7 +90,7 @@ export const getProjectsById = createAsyncThunk('userProjects/projectId', async(
 
 export const updateProject = createAsyncThunk('userProjects/projectUpdate', async(project)=>{
     try {
-        const response5 = await axios.put(`http://localhost:3001/project/${project.idUser}/${project.id}`,{
+        const response5 = await axios.put(`https://notedo.onrender.com/project/${project.idUser}/${project.id}`,{
          name:project.projectState.name,
          description:project.projectState.description
     },
@@ -119,11 +120,9 @@ const projects = createSlice({
        
     },
     reducers:{
-   /* getTask: (state,action) =>{
-    const project = state.projects.tasks
-    const task = project.filter((task) => task.id === action.payload)
-    console.log('task del reducer', task)
-   } */
+    clearProjectState: (state,payload)=>{
+        state.projects = []
+    }
         },
     
     extraReducers:{
@@ -145,8 +144,9 @@ const projects = createSlice({
      },
      [getProjectsById.fulfilled]: (state,{payload})=>{
          localStorage.setItem("projectById", JSON.stringify(payload));
-        console.log('layoad del getPbyid', payload)
+         
         state.projectById = payload
+        
         state.loadingProjectId = false
      },
      [updateProject.fulfilled]: (state,{payload})=>{
@@ -162,4 +162,5 @@ const projects = createSlice({
 })
 
 export default projects.reducer
+export const {clearProjectState} = projects.actions
 

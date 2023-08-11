@@ -9,6 +9,17 @@
     position:fixed;
 }
 
+.cardModalUserNotExist{
+    background-color: white;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+
 .form{
     display:flex;
     flex-direction: column;

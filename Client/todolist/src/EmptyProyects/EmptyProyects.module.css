@@ -1,7 +1,7 @@
 .EmptyContainer{
     font-size: 10px;
     color:rgb(187, 186, 186);
-    height: auto;
+    height: 70vh;
     width: 100vw;
     display:flex;
     flex-direction: column;
@@ -13,4 +13,11 @@
 .emptyIcon{
     display:flex;
     text-align: center;
+}
+.createProjectBtn{
+    text-align: center;
+}
+.createProjectBtn:hover{
+cursor: pointer;
+font-weight: 800;
 }

@@ -7,16 +7,20 @@ import s from './Task.module.css'
 import { NavLink } from 'react-router-dom';
 import { ProjectsTasks } from '../App/ProjectsTasks/ProjectsTasks';
 import { UseProject } from '../Hooks/UseProject';
+import { LoadingCards } from '../Loading/LoadingCards';
+import { Loading } from '../Loading/Loading';
 export const Task = () => {
  
   
   
  const loading = useSelector(state => state.projects.loadingProjectId)
 const project = UseProject()
+const tasks = useSelector(state => state.tasks.tasksProject)
+const loading2 = useSelector(state => state.tasks.loadingTasK)
+/* console.log('state tasks', tasks) */
 
 
-
- /*  if(loading) return <h1>Loading...</h1> */
+ if(loading) return <LoadingCards/>
   return (
     <>
  
@@ -32,7 +36,7 @@ const project = UseProject()
             {project.description}
          </Typography>
          
-          { project.tasks.length === 0 ? <EmptyTask/> : <ProjectsTasks/> }
+          { tasks.length === 0 ? <EmptyTask/> : <ProjectsTasks/> }
           
          
     </>

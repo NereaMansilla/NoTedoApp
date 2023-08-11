@@ -1,0 +1,84 @@
+.containerVerify{
+    background-color: #4CBB17;
+    height: 100vh;
+    width: 100vw;
+    z-index: 20;
+}
+
+
+.formContainer{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.backLogintxt{
+    
+    display: flex;
+    justify-content: flex-start;
+    width: 90vw;
+    margin-left: 10px;
+    color:#0080FF;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.formVerify{
+    height: 70vh;
+    width: 70vw;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.txtRecover{
+    color:gray;
+    
+}
+
+.errorVerify{
+    color:red;
+}
+
+
+@media screen and (min-width: 600px) {
+   
+    .formVerify{
+       
+       
+        width: 60vw;
+    }
+}
+
+
+@media screen and (min-width: 750px) {
+   
+    .formVerify{
+       
+        
+        width: 50vw;
+    }
+}
+
+@media screen and (min-width: 950px) {
+   
+    .formVerify{
+       
+       
+        max-width: 40vw;
+    }
+}
+
+@media screen and (min-width: 1050px) {
+   
+    .formVerify{
+       
+        
+        width: 30vw;
+    }
+}

@@ -4,16 +4,30 @@
     box-sizing: 0px;
     padding:0px;
 }
+.containerRegister{
+    height: 100vh;
+    background-color:#4CBB17;
+}
+.txtHome{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    color:#0080FF;
+    margin-left: 10px;
+    cursor: pointer;
+    
+}
 
 .containerForm{
+    height: 95vh;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color:#4CBB17;
+   
     
 }
+
 
 
 
@@ -21,8 +35,8 @@
     
     
     background-color: aliceblue;
-    height: 70vh;
-    width:30%;
+    height: 75vh;
+    width:75%;
     border-radius: 5%;
     display:flex;
     flex-direction: column;
@@ -40,15 +54,54 @@
 justify-content: flex-start;
 align-self: flex-start;
 
+
 }
 
 
 .btnAccount{
-    position:relative;
-    top:10%;
+     position:relative;
+    top:5%; 
 
 }
 
 .error{
     color:red;
+}
+
+
+@media screen and (min-width: 650px) {
+   
+    .formAccount{
+       
+        width: 60vw;
+    }
+}
+
+@media screen and (min-width: 850px) {
+   
+    .formAccount{
+       
+         width: 50vw; 
+    }
+}
+
+
+
+@media screen and (min-width: 1150px) {
+   
+    .formAccount{
+       
+        width: 40vw;
+        
+    }
+}
+
+
+@media screen and (min-width: 1250px) {
+   
+    .formAccount{
+       
+       width: 30vw;
+        
+    }
 }

@@ -1,0 +1,11 @@
+.containerTaskCard{
+display:flex;
+justify-content: center;
+align-items: center;
+}
+
+.contentCardTask{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}

@@ -1,0 +1,82 @@
+
+.navbarContainer{
+    
+} 
+
+.toolBar{
+    
+    background-color: #4CBB17;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    
+    
+   
+
+}
+
+.txtNavBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.txtUsername:hover{
+    color:rgb(28, 28, 219);
+    text-decoration: underline;
+}
+
+.btnCreateP{
+     width: 25vw;
+    height: 5vh;
+    font-size: 10px;
+    background-color: #0080FF;
+    border-radius: 50px;
+    color: white;
+    margin-right: 50px; 
+ 
+}
+
+
+
+ @media screen and (min-width: 650px) {
+    .btnCreateP{
+    
+      width: 20vw;
+      
+    } 
+
+}
+
+
+@media screen and (min-width: 750px) {
+    .btnCreateP{
+     
+      width: 15vw;
+     
+      
+    } 
+
+}
+
+
+@media screen and (min-width: 850px) {
+    .btnCreateP{
+      
+      width: 15vw;
+      
+    } 
+
+}
+
+
+@media screen and (min-width: 1000px) {
+    .btnCreateP{
+      
+      width: 10vw;
+      
+    } 
+
+}

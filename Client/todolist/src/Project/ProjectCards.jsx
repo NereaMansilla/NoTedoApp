@@ -10,7 +10,7 @@ import { UseToken } from '../Hooks/UseToken.jsx'
 import { UseId } from '../Hooks/UseId.jsx'
 import { Loading } from '../Loading/Loading.jsx'
 import { LoadingCards } from '../Loading/LoadingCards.jsx'
-
+import s from './Card.module.css'
 
 
 export const ProjectCards = () => {
@@ -20,7 +20,7 @@ export const ProjectCards = () => {
     const id = UseId()
     const loading = useSelector(state => state.projects.loadingProjects)
     const project = useSelector(state => state.projects)
-
+ 
     useEffect(()=>{
         dispatch(getProjects({token: token, id: id}))
         },[dispatch, token,id])
@@ -30,17 +30,17 @@ if(loading === true) return <LoadingCards/>
   return (
    
 
-<Container>
-<Grid container  spacing={2} justify='center' alignItems="center" sx={{height: '100vh', marginTop:'55px'}}>
+
+<div className={s.containerCards}>
     
     { project.projects.length > 0 ? project.projects?.map((c)=>{
    
-    return  <Grid item xs={12} md={6} lg={4} justify='center' key={c.id}>  <ProjectCard  project={c} key={c.id} />  </Grid>
+    return  <ProjectCard  project={c} key={c.id} />  
     
    }) : <EmptyProyects/>} 
 
-</Grid>
-</Container>
+</div>
+
 
   )
 

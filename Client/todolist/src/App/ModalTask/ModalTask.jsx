@@ -32,7 +32,7 @@ const dispatch = useDispatch()
   const handleSendTask = () =>{
     dispatch(createTask( {task:input,id:project.id} ) ) 
     dispatch(openTaskModal(false))
-    dispatch(getProjectsById({token,idUser,id:project.id}))
+  
    
   }
    if(modal === false) return null 

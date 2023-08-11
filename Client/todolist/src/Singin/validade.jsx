@@ -6,14 +6,14 @@ export const Validator = (input) =>{
 
     const error= {}
     const regex= /^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm
-    if(!input.name){
+/*     if(!input.name){
      error.name = 'name is required'
-    }
+    } */
 
     if(!input.email){
       error.email = 'email is required'
     }else if (!regex.test(input.email)){
-      error.email= ' Cmon, you know that this is not a valid email format :/ '
+      error.email= ' This is not a validate email'
     }
     if(!input.password){
       error.password = 'password is required'

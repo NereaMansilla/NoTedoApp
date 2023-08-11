@@ -3,13 +3,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import logoNavBar from '../Assets/logoNavbar.png'
 import Button from '@mui/material/Button';
-/* import {useSelector} from 'react-redux' */
-/* import {Modal} from '../Modal/Modal.jsx' */
-/* import  {setModal}  from '../Features/CreateProjects/CreateProjects';
-import {useDispatch} from 'react-redux' */
 import { setModal } from '../Features/CreateProjects/CreateProjects';
 import { useDispatch } from 'react-redux';
 import { UseUser } from '../Hooks/UseUser';
+import { NavLink } from 'react-router-dom';
+import s from './NavBar.module.css'
 import React from 'react'
 
 
@@ -20,7 +18,7 @@ const dispatch = useDispatch()
 const user= UseUser()
 
 
-
+console.log('user', user)
 
 
 const openModalButton = () =>{
@@ -28,27 +26,26 @@ const openModalButton = () =>{
 }
 
   return (
-    <div>
-
-
-
  
         
-<AppBar sx={{ background: '#4CBB17'}}>
-    <Toolbar>
-        <Typography variant='h6'>
+<AppBar className={s.AppBar}>
+    <Toolbar className={s.toolBar}>
+        <Typography className={s.txtNavBar} variant='h6'>
 
             <img src={logoNavBar} alt='logo' />
             
-        </Typography>
-        <Typography variant='h6' >
-       Hello {user}! 
+            <NavLink to={`/${user}`} style= { { textDecoration: 'none', color:'white' }}>
+            <h4 className={s.txtUsername}>Hello {user}!</h4>
+            </NavLink>
         </Typography>  
-    <Button sx={{background: '#0080FF', color: '#000', borderRadius: '50px'}} onClick={openModalButton}> Create new Project </Button>                
+     
+
+    <Button className={s.btnCreateP}  onClick={openModalButton}> Create new Project </Button>                
+ 
     </Toolbar>
 </AppBar>
 
 
-    </div>
+    
   )
 }

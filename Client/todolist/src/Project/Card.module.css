@@ -8,3 +8,39 @@
 color:blue;
 text-decoration: underline blue;
 }
+
+
+.containerCards{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    padding-top: 20%;
+  
+}
+
+
+@media screen and (min-width: 800px) {
+   
+    .containerCards{
+       
+         display:grid;
+         grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        padding-top: 15%;
+       
+        
+    }
+}
+
+@media screen and (min-width: 1000px) {
+   
+    .containerCards{
+       
+         
+         grid-template-columns: repeat(3, 1fr);
+         padding-top: 10%;
+    }
+}
