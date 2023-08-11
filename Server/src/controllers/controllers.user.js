@@ -22,8 +22,8 @@ export async function singIn(req, res) {
             }
 
         })
-       
-        if (user === null) res.json({ msg: "there is no user with this data", authorized:false})
+        console.log('user', user)
+        if (user === null) res.json(false)
 
 
         else {
@@ -41,14 +41,14 @@ export async function singIn(req, res) {
                 })
 
             }
-            else {
+            /* else {
                 
                 res.json({
                     msg: "password or user invalid",
                     authorized:false
                 })
 
-            }
+            } */
         }
        
 
@@ -91,9 +91,9 @@ export async function singUp(req, res, next) {
                 expiresIn: `${process.env.EXPIRES}`
     
             })
-            console.log('token', token)
+           
             next()
-            console.log(user)
+            
             res.json({
                 user: user,
                 token: token,

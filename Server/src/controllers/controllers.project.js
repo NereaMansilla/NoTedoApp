@@ -14,7 +14,8 @@ export async function getProjects(req, res) {
             }, 
             include: Task
         })
-   
+    
+    
     res.json(projects)
 
     } catch (error) {
