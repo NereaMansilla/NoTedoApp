@@ -40,7 +40,7 @@ const openModalButton = () =>{
         </Typography>  
      
 
-    <Button className={s.btnCreateP}  onClick={openModalButton}> Create new Project </Button>                
+    <Button className={s.btnCreateP}  sx={{fontSize:'10px'}} variant="contained" onClick={openModalButton}> Create new Project </Button>                
  
     </Toolbar>
 </AppBar>

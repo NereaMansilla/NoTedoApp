@@ -7,13 +7,13 @@ export const userCall = createAsyncThunk(
   'users/axiosUser', async (input) =>{
   
   try{
-
+ console.log('llego al userCall', input)
     const response = await axios.post('https://notedo.onrender.com/user/singin', {
       
       password: input.password,
       email: input.email
      } )
-    console.log('response del singin', response.data)
+  
     return response.data
     }
     catch(err){

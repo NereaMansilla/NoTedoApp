@@ -27,24 +27,25 @@
     color:rgb(28, 28, 219);
     text-decoration: underline;
 }
+ .btnCreateP{
+ width: 25vw;
+ height: 5vh;
+ position: relative;
+ right: 10%;
 
-.btnCreateP{
-     width: 25vw;
-    height: 5vh;
-    font-size: 10px;
-    background-color: #0080FF;
-    border-radius: 50px;
-    color: white;
-    margin-right: 50px; 
+
+
  
 }
-
+ 
 
 
  @media screen and (min-width: 650px) {
     .btnCreateP{
     
       width: 20vw;
+     
+     
       
     } 
 
@@ -66,6 +67,7 @@
     .btnCreateP{
       
       width: 15vw;
+      font-size: 11px;
       
     } 
 
@@ -75,8 +77,22 @@
 @media screen and (min-width: 1000px) {
     .btnCreateP{
       
-      width: 10vw;
+      width: 15vw;
+    
+      right: 5%;
       
     } 
+
+}
+
+
+@media screen and (min-width: 1150px) {
+  .btnCreateP{
+    
+    width: 12vw;
+   
+    right: 5%;
+    
+  } 
 
 }

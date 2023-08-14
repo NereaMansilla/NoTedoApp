@@ -12,6 +12,7 @@ import { Validator } from './validade.jsx';
 import Typography from '@mui/material/Typography';
 import logoSingin from '../Assets/logo.png'
 import { NavLink, Link} from 'react-router-dom';
+import { LoadingCards } from '../Loading/LoadingCards.jsx'
 
 
 
@@ -24,6 +25,7 @@ export const Singin = () => {
  
  const user = useSelector(state => state.users)
  const loading = useSelector(state => state.users.loading)
+ console.log('loading', loading)
  const [errorSingin,setErrorSingin] = useState("")
  
 
@@ -41,7 +43,7 @@ export const Singin = () => {
 
   const [error,setError] = useState({})
 
- console.log(error)
+ 
   useEffect(()=>{
  if( user.users.authorized && user.users.authorized === true) navigate('/projects')
 }, [user.users.authorized, navigate])   
@@ -75,7 +77,7 @@ export const Singin = () => {
   }
 
   
-
+/* if(loading) return <LoadingCards/> */
   return (
     
 
@@ -107,9 +109,12 @@ export const Singin = () => {
        user.users  === false ? <Error /> : null
   } 
   <br/>
-        <Button variant="contained" onClick={ handleButton} className={s.btn}> 
-          Send
-        </Button>
+  {loading ?  <Button variant="contained" className={s.btn}> 
+        <img className={s.btnLoading} src="https://media.giphy.com/media/L05HgB2h6qICDs5Sms/giphy.gif"  alt='Loading'/>
+        </Button> 
+      : <Button  className={s.btn} variant="contained" onClick={ handleButton} >Send</Button>  
+      }
+       
 
         
       </form>

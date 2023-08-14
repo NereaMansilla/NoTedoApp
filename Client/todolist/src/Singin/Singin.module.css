@@ -30,7 +30,10 @@
 .errors{
   color:red;
 }
-
+.btnLoading{
+  height: 30px;
+  width: 30px;
+}
 .txtPassword{
    
  color:white;
